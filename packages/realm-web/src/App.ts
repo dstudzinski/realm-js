@@ -1,8 +1,10 @@
+import { NetworkTransport } from "realm-network-transport";
+
 import { create as createFunctionsFactory } from "./FunctionsFactory";
 import { User, UserState, UserControlHandle } from "./User";
-import { NetworkTransport } from "realm-network-transport";
 import { AuthenticatedTransport, Transport, BaseTransport } from "./transports";
 import { Credentials } from "./Credentials";
+import { create as createServicesFactory } from "./services";
 
 /**
  * Configuration to pass as an argument when constructing an app.
@@ -22,6 +24,9 @@ export class App<
     public readonly functions: FunctionsFactoryType;
 
     /** @inheritdoc */
+    public readonly services: Realm.Services.ServicesFactory;
+
+    /** @inheritdoc */
     public readonly id: string;
 
     /**
@@ -39,14 +44,10 @@ export class App<
      */
     private static readonly BASE_ROUTE = "/api/client/v2.0";
 
-    /**
-     * A transport adding the base route prefix to all requests
-     */
+    /** A transport adding the base route prefix to all requests. */
     private readonly baseTransport: Transport;
 
-    /**
-     * A transport adding the base and app route prefix to all requests
-     */
+    /** A transport adding the base and app route prefix to all requests. */
     private readonly appTransport: Transport;
 
     /**
@@ -92,6 +93,8 @@ export class App<
         this.functions = createFunctionsFactory<FunctionsFactoryType>(
             this.appTransport,
         );
+        // Construct the services factory
+        this.services = createServicesFactory(this.appTransport);
     }
 
     /**
