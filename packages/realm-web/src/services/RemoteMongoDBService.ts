@@ -1,6 +1,6 @@
 import { Transport } from "../transports";
 import { create as createFunctionsFactory } from "../FunctionsFactory";
-import { deserialize, serialize } from "./utils";
+import { deserialize, serialize } from "../utils/ejson";
 
 type Document = Realm.Services.RemoteMongoDB.Document;
 type NewDocument<T extends Document> = Realm.Services.RemoteMongoDB.NewDocument<
