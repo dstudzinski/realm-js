@@ -2,6 +2,10 @@ import { Transport } from "../transports";
 import { create as createFunctionsFactory } from "../FunctionsFactory";
 import { deserialize } from "../utils/ejson";
 
+type HTTP = Realm.Services.HTTP;
+type RequestOptions = Realm.Services.HTTP.RequestOptions;
+type Response = Realm.Services.HTTP.Response;
+
 // @see https://github.com/mongodb/stitch-js-sdk/blob/master/packages/core/services/http/src/internal/CoreHttpServiceClient.ts
 
 /**
@@ -9,7 +13,7 @@ import { deserialize } from "../utils/ejson";
  *
  * @see https://docs.mongodb.com/stitch/services/http/
  */
-class HTTPService implements Realm.Services.HTTP {
+class HTTPService implements HTTP {
     /**
      * The functions factory interface to use when sending requests.
      */
@@ -35,7 +39,7 @@ class HTTPService implements Realm.Services.HTTP {
      * @param options Options related to the request.
      * @returns The response.
      */
-    get(url: string, options: Realm.Services.HTTP.RequestOptions = {}) {
+    get(url: string, options: RequestOptions = {}): Promise<Response> {
         return this.functions.get({ url, ...options });
     }
 
@@ -46,7 +50,7 @@ class HTTPService implements Realm.Services.HTTP {
      * @param options Options related to the request.
      * @returns The response.
      */
-    post(url: string, options: Realm.Services.HTTP.RequestOptions = {}) {
+    post(url: string, options: RequestOptions = {}): Promise<Response> {
         return this.functions.post({ url, ...options });
     }
 
@@ -57,7 +61,7 @@ class HTTPService implements Realm.Services.HTTP {
      * @param options Options related to the request.
      * @returns The response.
      */
-    put(url: string, options: Realm.Services.HTTP.RequestOptions = {}) {
+    put(url: string, options: RequestOptions = {}): Promise<Response> {
         return this.functions.put({ url, ...options });
     }
 
@@ -68,7 +72,7 @@ class HTTPService implements Realm.Services.HTTP {
      * @param options Options related to the request.
      * @returns The response.
      */
-    delete(url: string, options: Realm.Services.HTTP.RequestOptions = {}) {
+    delete(url: string, options: RequestOptions = {}): Promise<Response> {
         return this.functions.delete({ url, ...options });
     }
 
@@ -79,7 +83,7 @@ class HTTPService implements Realm.Services.HTTP {
      * @param options Options related to the request.
      * @returns The response.
      */
-    head(url: string, options: Realm.Services.HTTP.RequestOptions = {}) {
+    head(url: string, options: RequestOptions = {}): Promise<Response> {
         return this.functions.head({ url, ...options });
     }
 
@@ -90,7 +94,7 @@ class HTTPService implements Realm.Services.HTTP {
      * @param options Options related to the request.
      * @returns The response.
      */
-    patch(url: string, options: Realm.Services.HTTP.RequestOptions = {}) {
+    patch(url: string, options: RequestOptions = {}): Promise<Response> {
         return this.functions.patch({ url, ...options });
     }
 }
