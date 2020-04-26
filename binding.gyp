@@ -105,7 +105,7 @@
         "lib/notification-worker.js",
         "lib/notifier.js",
         "lib/permission-api.js",
-        "lib/submit-analytics.js",
+#         "lib/submit-analytics.js",
         "lib/user-methods.js",
         "lib/worker.js",
 
